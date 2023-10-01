@@ -12,12 +12,14 @@
     "next": "latest",
     "react": "latest",
     "react-dom": "latest",
-    "react-relay": "^15.0.0"
+    "react-relay": "^15.0.0",
+    "relay-runtime": "^15.0.0"
   },
   "devDependencies": {
     "@types/node": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",
+    "@types/relay-runtime": "^14.1.14",
     "autoprefixer": "latest",
     "babel-plugin-relay": "^15.0.0",
     "eslint": "latest",
