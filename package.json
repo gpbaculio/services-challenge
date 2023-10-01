@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "concurrently --kill-others \"npm run dbDev\" \"npm run fe\"",
     "dbDev": "cd db && npm run dev",
-    "fe": "cd services && npm start"
+    "fe": "cd services-web && npm start"
   },
   "keywords": [],
   "author": "",
