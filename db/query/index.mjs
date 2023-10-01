@@ -7,7 +7,19 @@ import { nodeField } from "./types/ServiceRequestType.mjs";
 const query = new GraphQLObjectType({
   name: "Query",
   fields: () => ({
-    viewer: { type: GraphQLViewerType },
+    viewer: {
+      type: GraphQLViewerType,
+      resolve: (root, args, context) => {
+        return "mock viewer";
+        // Check if the user is authenticated
+        // if (!context?.user) {
+        //   return null;
+        // }
+
+        // Return the authenticated user
+        // return context?.user;
+      },
+    },
     node: nodeField,
   }),
 });
