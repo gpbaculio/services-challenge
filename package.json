@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "concurrently --kill-others \"npm run backend\" \"npm run frontend\"",
-    "start": "cd backend && npm start",
-    "backend": "cd backend && npm run dev"
+    "dev": "concurrently --kill-others \"npm run dbDev\" \"npm run fe\"",
+    "dbDev": "cd db && npm run dev",
+    "fe": "cd services && npm start"
   },
   "keywords": [],
   "author": "",
