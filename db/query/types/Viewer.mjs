@@ -22,8 +22,7 @@ const GraphQLViewerType = new GraphQLObjectType({
       type: ServiceRequestConnection,
       args: { ...connectionArgs },
       resolve: async (_, { ...args }) => {
-        console.log("args", args);
-        const serviceRequests = await prisma.serviceRequest({
+        const serviceRequests = await prisma.serviceRequest.findMany({
           skip: args?.after || undefined,
           first: args?.first || undefined,
         });
