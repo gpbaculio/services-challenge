@@ -1,22 +1,11 @@
-import { GraphQLSchema, GraphQLObjectType, GraphQLString } from "graphql";
+import { GraphQLSchema } from "graphql";
 
-/**
- * Construct a GraphQL schema and define the necessary resolvers.
- *
- * type Query {
- *   hello: String
- * }
- */
+import query from "./query/index.mjs";
+import mutation from "./mutations/index.mjs";
+
 const schema = new GraphQLSchema({
-  query: new GraphQLObjectType({
-    name: "Query",
-    fields: {
-      hello: {
-        type: GraphQLString,
-        resolve: () => "worlds",
-      },
-    },
-  }),
+  query,
+  mutation,
 });
 
 export default schema;
