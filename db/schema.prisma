@@ -15,4 +15,15 @@ model ServiceRequest {
   status        String
   scheduledDate String
   contactInfo   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// from prev project
+model Todo {
+  id        String   @id @default(uuid())
+  title     String
+  complete  Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
