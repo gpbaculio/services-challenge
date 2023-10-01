@@ -1,0 +1,97 @@
+# @generated
+# run `npm run print-schema` to re-generate this file.
+
+type Query {
+  viewer: Viewer
+
+  """Fetches an object given its ID"""
+  node(
+    """The ID of an object"""
+    id: ID!
+  ): Node
+}
+
+type Viewer implements Node {
+  """The ID of an object"""
+  id: ID!
+  serviceRequests(
+    """Returns the items in the list that come after the specified cursor."""
+    after: String
+
+    """Returns the first n items from the list."""
+    first: Int
+
+    """Returns the items in the list that come before the specified cursor."""
+    before: String
+
+    """Returns the last n items from the list."""
+    last: Int
+  ): ServiceRequestConnection
+}
+
+"""An object with an ID"""
+interface Node {
+  """The id of the object."""
+  id: ID!
+}
+
+"""A connection to a list of items."""
+type ServiceRequestConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [ServiceRequestEdge]
+}
+
+"""Information about pagination in a connection."""
+type PageInfo {
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+}
+
+"""An edge in a connection."""
+type ServiceRequestEdge {
+  """The item at the end of the edge"""
+  node: ServiceRequest
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+type ServiceRequest implements Node {
+  """The ID of an object"""
+  id: ID!
+  customerName: String
+  serviceType: String
+  status: String
+  scheduledDate: String
+  contactInfo: String
+}
+
+type Mutation {
+  createServiceRequest(input: CreateServiceRequestInput!): CreateServiceRequestPayload
+}
+
+type CreateServiceRequestPayload {
+  serviceRequestEdge: ServiceRequestEdge
+  clientMutationId: String
+}
+
+input CreateServiceRequestInput {
+  customerName: String!
+  serviceType: String!
+  status: String!
+  scheduledDate: String!
+  contactInfo: String!
+  clientMutationId: String
+}
