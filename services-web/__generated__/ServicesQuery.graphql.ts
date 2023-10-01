@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<70bcf95874a1cbeb643ab5c6c79fbf21>>
+ * @generated SignedSource<<4c3d66214e81188d1b5947685b9b76fc>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -13,6 +13,7 @@ import type { FragmentRefs } from "relay-runtime";
 export type ServicesQuery$variables = {};
 export type ServicesQuery$data = {
   readonly viewer: {
+    readonly id: string;
     readonly " $fragmentSpreads": FragmentRefs<"ServicesListFragment">;
   } | null;
 };
@@ -22,20 +23,20 @@ export type ServicesQuery = {
 };
 
 const node: ConcreteRequest = (function(){
-var v0 = [
-  {
-    "kind": "Literal",
-    "name": "first",
-    "value": 10
-  }
-],
-v1 = {
+var v0 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "id",
   "storageKey": null
-};
+},
+v1 = [
+  {
+    "kind": "Literal",
+    "name": "first",
+    "value": 2
+  }
+];
 return {
   "fragment": {
     "argumentDefinitions": [],
@@ -51,6 +52,7 @@ return {
         "name": "viewer",
         "plural": false,
         "selections": [
+          (v0/*: any*/),
           {
             "args": null,
             "kind": "FragmentSpread",
@@ -77,9 +79,10 @@ return {
         "name": "viewer",
         "plural": false,
         "selections": [
+          (v0/*: any*/),
           {
             "alias": null,
-            "args": (v0/*: any*/),
+            "args": (v1/*: any*/),
             "concreteType": "ServiceRequestConnection",
             "kind": "LinkedField",
             "name": "serviceRequests",
@@ -108,7 +111,6 @@ return {
                     "name": "node",
                     "plural": false,
                     "selections": [
-                      (v1/*: any*/),
                       {
                         "alias": null,
                         "args": null,
@@ -144,6 +146,7 @@ return {
                         "name": "contactInfo",
                         "storageKey": null
                       },
+                      (v0/*: any*/),
                       {
                         "alias": null,
                         "args": null,
@@ -197,34 +200,33 @@ return {
                 "storageKey": null
               }
             ],
-            "storageKey": "serviceRequests(first:10)"
+            "storageKey": "serviceRequests(first:2)"
           },
           {
             "alias": null,
-            "args": (v0/*: any*/),
+            "args": (v1/*: any*/),
             "filters": null,
             "handle": "connection",
             "key": "ServicesList_serviceRequests",
             "kind": "LinkedHandle",
             "name": "serviceRequests"
-          },
-          (v1/*: any*/)
+          }
         ],
         "storageKey": null
       }
     ]
   },
   "params": {
-    "cacheID": "584b66a6975a410c6635853b13ad9de9",
+    "cacheID": "5476456bc3dfe065edd943df1aebedec",
     "id": null,
     "metadata": {},
     "name": "ServicesQuery",
     "operationKind": "query",
-    "text": "query ServicesQuery {\n  viewer {\n    ...ServicesListFragment\n    id\n  }\n}\n\nfragment ServiceFragment on ServiceRequest {\n  id\n  customerName\n  serviceType\n  status\n  scheduledDate\n  contactInfo\n}\n\nfragment ServicesListFragment on Viewer {\n  serviceRequests(first: 10) {\n    edges {\n      cursor\n      node {\n        ...ServiceFragment\n        id\n        __typename\n      }\n    }\n    pageInfo {\n      hasNextPage\n      hasPreviousPage\n      startCursor\n      endCursor\n    }\n  }\n}\n"
+    "text": "query ServicesQuery {\n  viewer {\n    id\n    ...ServicesListFragment\n  }\n}\n\nfragment ServiceFragment on ServiceRequest {\n  customerName\n  serviceType\n  status\n  scheduledDate\n  contactInfo\n}\n\nfragment ServicesListFragment on Viewer {\n  serviceRequests(first: 2) {\n    edges {\n      cursor\n      node {\n        ...ServiceFragment\n        id\n        __typename\n      }\n    }\n    pageInfo {\n      hasNextPage\n      hasPreviousPage\n      startCursor\n      endCursor\n    }\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "35c72bbab4201903689b09da2e1c526a";
+(node as any).hash = "899b58994bbe32ff797602c2d82ac33b";
 
 export default node;

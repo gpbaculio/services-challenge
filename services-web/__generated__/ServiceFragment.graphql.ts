@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<da843c1b0557cb0294becfb10f1963fc>>
+ * @generated SignedSource<<e5bba001ee3ebaf9bb748d9a29b1ba90>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -13,7 +13,6 @@ import type { FragmentRefs } from "relay-runtime";
 export type ServiceFragment$data = {
   readonly contactInfo: string | null;
   readonly customerName: string | null;
-  readonly id: string;
   readonly scheduledDate: string | null;
   readonly serviceType: string | null;
   readonly status: string | null;
@@ -30,13 +29,6 @@ const node: ReaderFragment = {
   "metadata": null,
   "name": "ServiceFragment",
   "selections": [
-    {
-      "alias": null,
-      "args": null,
-      "kind": "ScalarField",
-      "name": "id",
-      "storageKey": null
-    },
     {
       "alias": null,
       "args": null,
@@ -77,6 +69,6 @@ const node: ReaderFragment = {
   "abstractKey": null
 };
 
-(node as any).hash = "e998ae5352d75c2effeefdcd85cabe2e";
+(node as any).hash = "72fb198677da2209337badf628dc2929";
 
 export default node;

@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<9d0a2158ac63a4ca04daaa742d623b26>>
+ * @generated SignedSource<<5907641e3bcdb90852f21f9ab4089127>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -27,7 +27,7 @@ export type ServicesListPaginationQuery = {
 const node: ConcreteRequest = (function(){
 var v0 = [
   {
-    "defaultValue": 10,
+    "defaultValue": 2,
     "kind": "LocalArgument",
     "name": "count"
   },
@@ -139,7 +139,6 @@ return {
                     "name": "node",
                     "plural": false,
                     "selections": [
-                      (v2/*: any*/),
                       {
                         "alias": null,
                         "args": null,
@@ -175,6 +174,7 @@ return {
                         "name": "contactInfo",
                         "storageKey": null
                       },
+                      (v2/*: any*/),
                       {
                         "alias": null,
                         "args": null,
@@ -246,16 +246,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "b61fbd6cd008b2e36c964328cb92041a",
+    "cacheID": "fb5d5e29fb0069f60cf8346c4121f27a",
     "id": null,
     "metadata": {},
     "name": "ServicesListPaginationQuery",
     "operationKind": "query",
-    "text": "query ServicesListPaginationQuery(\n  $count: Int = 10\n  $cursor: String\n) {\n  viewer {\n    ...ServicesListFragment_1G22uz\n    id\n  }\n}\n\nfragment ServiceFragment on ServiceRequest {\n  id\n  customerName\n  serviceType\n  status\n  scheduledDate\n  contactInfo\n}\n\nfragment ServicesListFragment_1G22uz on Viewer {\n  serviceRequests(after: $cursor, first: $count) {\n    edges {\n      cursor\n      node {\n        ...ServiceFragment\n        id\n        __typename\n      }\n    }\n    pageInfo {\n      hasNextPage\n      hasPreviousPage\n      startCursor\n      endCursor\n    }\n  }\n}\n"
+    "text": "query ServicesListPaginationQuery(\n  $count: Int = 2\n  $cursor: String\n) {\n  viewer {\n    ...ServicesListFragment_1G22uz\n    id\n  }\n}\n\nfragment ServiceFragment on ServiceRequest {\n  customerName\n  serviceType\n  status\n  scheduledDate\n  contactInfo\n}\n\nfragment ServicesListFragment_1G22uz on Viewer {\n  serviceRequests(after: $cursor, first: $count) {\n    edges {\n      cursor\n      node {\n        ...ServiceFragment\n        id\n        __typename\n      }\n    }\n    pageInfo {\n      hasNextPage\n      hasPreviousPage\n      startCursor\n      endCursor\n    }\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "4c61bd5bc64a13790bc10948cf9e5770";
+(node as any).hash = "9baf0e3ae3d8bde07ac0b408db2e2f16";
 
 export default node;
