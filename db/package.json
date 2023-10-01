@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.mjs",
-    "print-schema": "node printSchema.mjs > ./schema.graphql"
+    "print-schema": "node printSchema.mjs > ../services-web/schema.graphql"
   },
   "keywords": [],
   "author": "",
