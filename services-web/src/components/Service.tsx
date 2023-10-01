@@ -1,9 +1,9 @@
 import React from "react";
-import { graphql } from "react-relay";
+import { graphql, useFragment } from "react-relay";
+import { ServiceFragment$key } from "../../__generated__/ServiceFragment.graphql";
 
-const ServiceFragment = graphql`
+const ServiceFragmentGraphQL = graphql`
   fragment ServiceFragment on ServiceRequest {
-    id
     customerName
     serviceType
     status
@@ -12,8 +12,13 @@ const ServiceFragment = graphql`
   }
 `;
 
-function Service() {
-  return <div>Service</div>;
+type ServiceProps = {
+  service: ServiceFragment$key | null;
+};
+
+function Service({ service }: ServiceProps) {
+  const serviceData = useFragment(ServiceFragmentGraphQL, service);
+  return <div style={{ color: "red" }}>{serviceData?.customerName}</div>;
 }
 
 export default Service;

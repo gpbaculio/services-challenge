@@ -1,18 +1,29 @@
 import { Suspense } from "react";
-import { graphql, PreloadedQuery, usePreloadedQuery } from "react-relay";
+import { PreloadedQuery, graphql, usePreloadedQuery } from "react-relay";
 
-const ServicesQuery = graphql`
+import { ServicesQuery } from "../../__generated__/ServicesQuery.graphql";
+import ServicesList from "./ServicesList";
+
+const ServicesQueryGraphQL = graphql`
   query ServicesQuery {
     viewer {
+      id
       ...ServicesListFragment
     }
   }
 `;
 
-export default function Services() {
+type ServicesProps = {
+  queryRef: PreloadedQuery<ServicesQuery>;
+};
+
+export default function Services({ queryRef }: ServicesProps) {
+  const { viewer } = usePreloadedQuery(ServicesQueryGraphQL, queryRef);
+
   return (
     <Suspense fallback="Loading (client side)...">
       <h1>Services</h1>
+      <ServicesList viewer={viewer} />
     </Suspense>
   );
 }
