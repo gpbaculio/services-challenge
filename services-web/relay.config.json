@@ -1,11 +1,10 @@
 {
   "root": ".",
   "sources": {
-    "src": "services_web",
-    "app": "services_web"
+    "src": "src"
   },
   "projects": {
-    "services_web": {
+    "src": {
       "language": "typescript",
       "schema": "schema.graphql",
       "output": "__generated__",
