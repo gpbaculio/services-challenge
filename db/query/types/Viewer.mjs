@@ -23,7 +23,7 @@ const GraphQLViewerType = new GraphQLObjectType({
       args: { ...connectionArgs },
       resolve: async (_, { ...args }) => {
         const serviceRequests = await prisma.serviceRequest.findMany();
-
+        // https://github.com/graphql/graphql-relay-js/issues/94#issuecomment-232410564
         return connectionFromArray(serviceRequests, args);
       },
     },
