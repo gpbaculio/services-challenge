@@ -4,6 +4,7 @@ import ServicesQueryNode, {
 } from "../../__generated__/ServicesQuery.graphql";
 
 import ServicesClientComponent from "@/components/ServicesClientComponent";
+import Header from "@/components/Header";
 
 export default async function Home() {
   const preloadedQuery = await loadSerializableQuery<
@@ -12,9 +13,12 @@ export default async function Home() {
   >(ServicesQueryNode.params, {});
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <ServicesClientComponent preloadedQuery={preloadedQuery} />
-    </main>
+    <>
+      <Header />
+      <main className="flex min-h-screen flex-col items-center justify-between p-24">
+        <ServicesClientComponent preloadedQuery={preloadedQuery} />
+      </main>
+    </>
   );
 }
 

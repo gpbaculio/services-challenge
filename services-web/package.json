@@ -13,6 +13,7 @@
     "next": "latest",
     "react": "latest",
     "react-dom": "latest",
+    "react-icons": "^4.11.0",
     "react-relay": "^15.0.0",
     "relay-runtime": "^15.0.0"
   },
