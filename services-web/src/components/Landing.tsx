@@ -1,7 +1,10 @@
+"use client";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 function Landing() {
+  const router = useRouter();
   return (
     <div className="pt-20 w-full bg-blue-100 flex items-center justify-center">
       <div className="text-center my-10">
@@ -11,7 +14,12 @@ function Landing() {
         <h2 className="text-xl mt-3 text-gray-700  font-semibold">
           WE ARE HERE FOR YOU
         </h2>
-        <button className="text-l text-white px-4 bg-blue-600 rounded py-2 my-4 hover:bg-blue-500">
+        <button
+          className="text-l text-white px-4 bg-blue-600 rounded py-2 my-4 hover:bg-blue-500"
+          onClick={() => {
+            router.push("/request-service");
+          }}
+        >
           REQUEST
         </button>
         <Image

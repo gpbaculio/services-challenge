@@ -10,11 +10,13 @@
     "relay": "relay-compiler"
   },
   "dependencies": {
+    "dayjs": "^1.11.10",
     "next": "latest",
     "react": "latest",
     "react-dom": "latest",
     "react-icons": "^4.11.0",
     "react-relay": "^15.0.0",
+    "react-tailwindcss-datepicker": "^1.6.6",
     "relay-runtime": "^15.0.0"
   },
   "devDependencies": {

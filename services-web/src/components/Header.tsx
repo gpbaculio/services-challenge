@@ -21,7 +21,7 @@ function Header() {
   }
 
   return (
-    <header className="shadow-md w-full fixed top-0 left-0 ">
+    <header className="shadow-md w-full fixed top-0 left-0 bg-white">
       <div className="flex items-center justify-between bg-white h-20 px-7 md:px-10">
         <Image
           className="cursor-pointer"

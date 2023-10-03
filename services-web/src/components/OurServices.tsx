@@ -19,7 +19,7 @@ function OurServices() {
             <div className="flex items-center mb-2">
               <Image src="/hvac.png" width={23} height={27} alt="" />
               <h2 className="text-lg font-semibold text-blue-800 ml-4">
-                Other
+                HVAC CLEANING
               </h2>
             </div>
             <p className="text-gray-400">
@@ -33,7 +33,7 @@ function OurServices() {
             <div className="flex items-center mb-2">
               <Image src="/solar.png" width={31} height={31} alt="" />
               <h2 className="text-lg font-semibold text-blue-800 ml-4">
-                Other
+                SOLAR PANEL CLEANING
               </h2>
             </div>
             <p className="text-gray-400">
@@ -47,7 +47,7 @@ function OurServices() {
             <div className="flex items-center mb-2">
               <Image src="/ac.png" width={27} height={27} alt="" />
               <h2 className="text-lg font-semibold text-blue-800 ml-4">
-                Other
+                AC MAINTENANCE
               </h2>
             </div>
             <p className="text-gray-400">
@@ -61,7 +61,7 @@ function OurServices() {
             <div className="flex items-center mb-2">
               <Image src="/plumbing.png" width={27} height={27} alt="" />
               <h2 className="text-lg font-semibold text-blue-800 ml-4">
-                Other
+                PLUMBING
               </h2>
             </div>
             <p className="text-gray-400">
@@ -75,7 +75,7 @@ function OurServices() {
             <div className="flex items-center mb-2">
               <Image src="/fan.png" width={30} height={30} alt="" />
               <h2 className="text-lg font-semibold text-blue-800 ml-4">
-                Other
+                FAN SERVICES
               </h2>
             </div>
             <p className="text-gray-400">
@@ -89,7 +89,7 @@ function OurServices() {
             <div className="flex items-center mb-2">
               <Image src="/other.png" width={30} height={30} alt="" />
               <h2 className="text-lg font-semibold text-blue-800 ml-4">
-                Other
+                OTHERS
               </h2>
             </div>
             <p className="text-gray-400">
