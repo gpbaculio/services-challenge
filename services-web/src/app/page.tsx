@@ -6,6 +6,7 @@ import ServicesQueryNode, {
 import ServicesClientComponent from "@/components/ServicesClientComponent";
 import Header from "@/components/Header";
 import Landing from "@/components/Landing";
+import OurServices from "@/components/OurServices";
 
 export default async function Home() {
   const preloadedQuery = await loadSerializableQuery<
@@ -16,9 +17,10 @@ export default async function Home() {
   return (
     <>
       <Header />
-      <main className="pt-20">
+      <main className=" bg-white">
         <Landing />
-        <ServicesClientComponent preloadedQuery={preloadedQuery} />
+        <OurServices />
+        {/* <ServicesClientComponent preloadedQuery={preloadedQuery} /> */}
       </main>
     </>
   );
