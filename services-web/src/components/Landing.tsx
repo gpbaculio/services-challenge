@@ -5,8 +5,10 @@ function Landing() {
   return (
     <div className="pt-20 w-full bg-blue-100 flex items-center justify-center">
       <div className="text-center my-10">
-        <h1 className="text-3xl text-black font-bold">THINKING ABOUT HVAC</h1>
-        <h2 className="text-xl mt-3 text-black font-semibold">
+        <h1 className="text-3xl text-gray-800  font-bold">
+          THINKING ABOUT HVAC
+        </h1>
+        <h2 className="text-xl mt-3 text-gray-700  font-semibold">
           WE ARE HERE FOR YOU
         </h2>
         <button className="text-l text-white px-4 bg-blue-600 rounded py-2 my-4 hover:bg-blue-500">

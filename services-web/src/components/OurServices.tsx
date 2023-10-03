@@ -3,8 +3,8 @@ import React from "react";
 
 function OurServices() {
   return (
-    <div className="w-full p-10">
-      <h1 className="text-black text-center text-2xl font-semibold">
+    <div id="services" className="w-full p-10">
+      <h1 className="text-gray-800 text-center text-2xl font-semibold">
         OUR SERVICES
       </h1>
       <div className="w-full flex items-center justify-center mt-4">

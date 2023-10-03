@@ -44,7 +44,7 @@ function Header() {
           {links.map((link, index) => (
             <li key={`${id}-${index}`} className="md:ml-8 md:my-0 my-7">
               <a
-                href={link.link}
+                href={link.link.includes("services") ? "#services" : link.link}
                 className="text-gray-800 font-semibold text-md hover:text-indigo-400 duration-100"
               >
                 {link.name}
