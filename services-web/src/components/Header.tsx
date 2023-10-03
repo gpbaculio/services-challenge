@@ -24,17 +24,17 @@ function Header() {
 
   return (
     <header className="shadow-md w-full fixed top-0 left-0 ">
-      <div className="md:flex items-center justify-between bg-white py-4 px-7 md:px-10">
+      <div className="flex items-center justify-between bg-white h-20 px-7 md:px-10">
         <Image
           className="cursor-pointer"
           src="/logo.png"
           alt="Logo"
           width={150}
-          height={37}
+          height={36}
         />
         <div
           onClick={toggleIsOpen}
-          className="text-3xl absolute right-8 top-4 cursor-pointer md:hidden"
+          className="text-3xl absolute right-8 cursor-pointer md:hidden"
         >
           {isOpen ? <IoMdClose color="black" /> : <IoIosMenu color="black" />}
         </div>
