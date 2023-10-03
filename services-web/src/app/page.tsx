@@ -5,6 +5,7 @@ import ServicesQueryNode, {
 
 import ServicesClientComponent from "@/components/ServicesClientComponent";
 import Header from "@/components/Header";
+import Landing from "@/components/Landing";
 
 export default async function Home() {
   const preloadedQuery = await loadSerializableQuery<
@@ -15,7 +16,8 @@ export default async function Home() {
   return (
     <>
       <Header />
-      <main className="flex min-h-screen flex-col items-center justify-between p-24">
+      <main className="pt-20">
+        <Landing />
         <ServicesClientComponent preloadedQuery={preloadedQuery} />
       </main>
     </>

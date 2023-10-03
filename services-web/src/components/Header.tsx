@@ -26,7 +26,7 @@ function Header() {
     <header className="shadow-md w-full fixed top-0 left-0 ">
       <div className="md:flex items-center justify-between bg-white py-4 px-7 md:px-10">
         <Image
-          className="h-8 cursor-pointer"
+          className="cursor-pointer"
           src="/logo.png"
           alt="Logo"
           width={150}
