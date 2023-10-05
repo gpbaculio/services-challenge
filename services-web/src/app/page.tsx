@@ -9,10 +9,10 @@ import Landing from "@/components/Landing";
 import OurServices from "@/components/OurServices";
 
 export default async function Home() {
-  const preloadedQuery = await loadSerializableQuery<
-    typeof ServicesQueryNode,
-    ServicesQuery
-  >(ServicesQueryNode.params, {});
+  // const preloadedQuery = await loadSerializableQuery<
+  //   typeof ServicesQueryNode,
+  //   ServicesQuery
+  // >(ServicesQueryNode.params, {});
 
   return (
     <>

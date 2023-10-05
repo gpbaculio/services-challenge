@@ -1,10 +1,15 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 
 import Image from "next/image";
 
 import Header from "@/components/Header";
+import Modal from "@/components/Modal";
 
-function page() {
+function Page() {
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
   return (
     <div className="min-h-screen w-full bg-blue-100 ">
       <Header />
@@ -29,7 +34,12 @@ function page() {
                 </div>
                 <h2 className="text-gray-700 font-bold text-xl mb-auto">$45</h2>
               </div>
-              <button className="mt-auto text-white bg-blue-500 hover:bg-blue-400 font-medium py-2 mx-9 sm:mx-2 md:mx-3 rounded shadow">
+              <button
+                onClick={() => {
+                  setIsModalVisible(true);
+                }}
+                className="mt-auto text-white bg-blue-500 hover:bg-blue-400 font-medium py-2 mx-9 sm:mx-2 md:mx-3 rounded shadow"
+              >
                 Book
               </button>
             </div>
@@ -149,8 +159,14 @@ function page() {
           </div>
         </div>
       </div>
+      <Modal
+        isVisible={isModalVisible}
+        onClose={() => setIsModalVisible(false)}
+      >
+        <h1>Test</h1>
+      </Modal>
     </div>
   );
 }
 
-export default page;
+export default Page;
