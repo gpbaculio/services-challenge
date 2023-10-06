@@ -7,7 +7,7 @@ import {
 } from "graphql-relay";
 import { PrismaClient } from "@prisma/client";
 
-const prisma = new PrismaClient();
+export const prisma = new PrismaClient();
 
 export const { nodeInterface, nodeField } = nodeDefinitions(
   async (globalId) => {
