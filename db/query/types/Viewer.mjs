@@ -6,10 +6,8 @@ import {
 } from "graphql-relay";
 import { PrismaClient } from "@prisma/client";
 
-import {
-  ServiceRequestConnection,
-  nodeInterface,
-} from "./ServiceRequestType.mjs";
+import { ServiceRequestConnection } from "./ServiceRequestType.mjs";
+import { nodeInterface } from "./definitions.mjs";
 
 export const prisma = new PrismaClient();
 

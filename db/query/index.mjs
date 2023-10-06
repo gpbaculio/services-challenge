@@ -2,7 +2,7 @@
 import { GraphQLObjectType } from "graphql";
 
 import GraphQLViewerType from "./types/Viewer.mjs";
-import { nodeField } from "./types/ServiceRequestType.mjs";
+import { nodeField } from "./types/definitions.mjs";
 
 const query = new GraphQLObjectType({
   name: "Query",
