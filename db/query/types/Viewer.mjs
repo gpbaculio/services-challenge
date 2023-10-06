@@ -13,12 +13,13 @@ import {
 
 export const prisma = new PrismaClient();
 
+const VIEWER_TYPE = "Viewer";
 // fields under viewer are data that requires authentication
 const GraphQLViewerType = new GraphQLObjectType({
-  name: "Viewer",
+  name: VIEWER_TYPE,
   interfaces: [nodeInterface],
   fields: () => ({
-    id: globalIdField("Viewer"),
+    id: globalIdField(VIEWER_TYPE),
     // this field are requests for services that is offered
     serviceRequests: {
       type: ServiceRequestConnection,
