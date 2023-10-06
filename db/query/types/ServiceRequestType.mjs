@@ -14,6 +14,7 @@ const SERVICE_REQUEST_TYPE = "ServiceRequest";
 export const { nodeInterface, nodeField } = nodeDefinitions(
   async (globalId) => {
     const { type, id } = fromGlobalId(globalId);
+
     if (type === SERVICE_REQUEST_TYPE) {
       const serviceRequest = await prisma.serviceRequest.findUnique({
         where: { id },
