@@ -38,6 +38,7 @@ model User {
   createdAt       DateTime         @default(now())
   updatedAt       DateTime         @updatedAt
   serviceRequests ServiceRequest[]
+  type            String           @default("customer") // can be admin
 }
 
 // from prev project
