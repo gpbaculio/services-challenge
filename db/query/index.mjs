@@ -9,17 +9,7 @@ const query = new GraphQLObjectType({
   fields: () => ({
     viewer: {
       type: GraphQLViewerType,
-      resolve: (root, args, context) => {
-        // mock viewer
-        return { id: "guest" };
-        // Check if the user is authenticated
-        // if (!context?.user) {
-        //   return null;
-        // }
-
-        // Return the authenticated user
-        // return context?.user;
-      },
+      resolve: (_root, _args, { user }) => user,
     },
     node: nodeField,
   }),
