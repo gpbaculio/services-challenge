@@ -17,16 +17,20 @@ passport.use(
 );
 
 // promisified authenticate functions
-const authenticateFacebook = (req, res) =>
-  new Promise((resolve, reject) => {
+const authenticateFacebook = (req, res) => {
+  return new Promise((resolve, reject) => {
     passport.authenticate(
       "facebook-token",
       { session: false },
       (err, data, info) => {
-        if (err) reject(err);
-        resolve({ data, info });
+        if (err) {
+          reject(err);
+        } else {
+          resolve({ data, info });
+        }
       }
     )(req, res);
   });
+};
 
 module.exports = { authenticateFacebook, authenticateGoogle };
