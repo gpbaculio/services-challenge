@@ -5,7 +5,7 @@ import bcrypt from "bcryptjs";
 import { generateToken } from "../auth.mjs";
 import { prisma } from "../query/types/ServiceRequestType.mjs";
 
-const GraphQLCreateUsernMutation = mutationWithClientMutationId({
+const GraphQLCreateUserMutation = mutationWithClientMutationId({
   name: "CreateUser",
   inputFields: {
     name: { type: new GraphQLNonNull(GraphQLString) },
@@ -21,10 +21,10 @@ const GraphQLCreateUsernMutation = mutationWithClientMutationId({
       return { token: null, error: "EMAIL_ALREADY_IN_USE" };
     }
 
-    const password = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(password, 10);
 
     const newUser = await prisma.user.create({
-      data: { name, email, password },
+      data: { name, email, password: hashedPassword },
     });
 
     const token = generateToken(newUser);
@@ -37,4 +37,4 @@ const GraphQLCreateUsernMutation = mutationWithClientMutationId({
   },
 });
 
-export default GraphQLCreateUsernMutation;
+export default GraphQLCreateUserMutation;
