@@ -5,8 +5,9 @@ import { nodeInterface } from "./definitions.mjs";
 
 export const SERVICE_REQUEST_TYPE = "ServiceRequest";
 
-const ServiceRequestType = new GraphQLObjectType({
+export const ServiceRequestType = new GraphQLObjectType({
   name: SERVICE_REQUEST_TYPE,
+  interfaces: [nodeInterface],
   fields: {
     id: globalIdField(SERVICE_REQUEST_TYPE),
     customerName: {
@@ -30,7 +31,6 @@ const ServiceRequestType = new GraphQLObjectType({
       resolve: ({ contactInfo }) => contactInfo,
     },
   },
-  interfaces: [nodeInterface],
 });
 
 export const {
@@ -41,4 +41,35 @@ export const {
   nodeType: ServiceRequestType,
 });
 
-export default ServiceRequestType;
+export const ADMIN_TYPE = "Admin";
+
+export const AdminType = new GraphQLObjectType({
+  name: ADMIN_TYPE,
+  interfaces: [nodeInterface],
+  fields: {
+    id: globalIdField(ADMIN_TYPE),
+    name: {
+      type: GraphQLString,
+      resolve: ({ name }) => name,
+    },
+    email: {
+      type: GraphQLString,
+      resolve: ({ email }) => email,
+    },
+    createdAt: {
+      type: GraphQLString,
+      resolve: ({ createdAt }) => createdAt,
+    },
+    updatedAt: {
+      type: GraphQLString,
+      resolve: ({ updatedAt }) => updatedAt,
+    },
+  },
+  //
+});
+
+export const { connectionType: AdminConnection, edgeType: GraphQLAdminEdge } =
+  connectionDefinitions({
+    name: ADMIN_TYPE,
+    nodeType: AdminType,
+  });

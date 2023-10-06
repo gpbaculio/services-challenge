@@ -1,12 +1,14 @@
 import { fromGlobalId, nodeDefinitions } from "graphql-relay";
 
-import { prisma } from "./Viewer.mjs";
-import ServiceRequestType, {
+import {
   SERVICE_REQUEST_TYPE,
-} from "./ServiceRequestType.mjs";
-import AdminType, { ADMIN_TYPE } from "./AdminUserType.mjs";
+  ServiceRequestType,
+  AdminType,
+  ADMIN_TYPE,
+} from "./ViewerTypes.mjs";
+import { prisma } from "../index.mjs";
 
-export const { nodeInterface, nodeField } = nodeDefinitions(
+const { nodeInterface, nodeField } = nodeDefinitions(
   async (globalId) => {
     const { type, id } = fromGlobalId(globalId);
 
@@ -38,3 +40,5 @@ export const { nodeInterface, nodeField } = nodeDefinitions(
     }
   }
 );
+
+export { nodeField, nodeInterface };
