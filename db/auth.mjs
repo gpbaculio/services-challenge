@@ -6,6 +6,7 @@ export async function getUser(token) {
   if (!token) {
     return { user: null };
   }
+
   try {
     const decodedToken = jwt.verify(token.substring(7), process.env.JWT_SECRET);
 
