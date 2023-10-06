@@ -19,6 +19,7 @@ const GraphQLViewerType = new GraphQLObjectType({
   interfaces: [nodeInterface],
   fields: () => ({
     id: globalIdField("Viewer"),
+    // this field are requests for services that is offered
     serviceRequests: {
       type: ServiceRequestConnection,
       args: { ...connectionArgs },
