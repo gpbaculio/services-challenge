@@ -9,11 +9,17 @@ import { PrismaClient } from "@prisma/client";
 
 export const prisma = new PrismaClient();
 
+const SERVICE_REQUEST_TYPE = "ServiceRequest";
+
 export const { nodeInterface, nodeField } = nodeDefinitions(
   async (globalId) => {
     const { type, id } = fromGlobalId(globalId);
-    if (type === "ServiceRequest") {
-      return await prisma.serviceRequest.findUnique({ where: { id } });
+    if (type === SERVICE_REQUEST_TYPE) {
+      const serviceRequest = await prisma.serviceRequest.findUnique({
+        where: { id },
+      });
+
+      return serviceRequest;
     } else {
       return null;
     }
@@ -29,9 +35,9 @@ export const { nodeInterface, nodeField } = nodeDefinitions(
 );
 
 const ServiceRequestType = new GraphQLObjectType({
-  name: "ServiceRequest",
+  name: SERVICE_REQUEST_TYPE,
   fields: {
-    id: globalIdField("ServiceRequest"),
+    id: globalIdField(SERVICE_REQUEST_TYPE),
     customerName: {
       type: GraphQLString,
       resolve: ({ customerName }) => customerName,
