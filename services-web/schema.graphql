@@ -80,6 +80,7 @@ type ServiceRequest implements Node {
 
 type Mutation {
   createServiceRequest(input: CreateServiceRequestInput!): CreateServiceRequestPayload
+  createUser(input: CreateUserInput!): CreateUserPayload
 }
 
 type CreateServiceRequestPayload {
@@ -93,5 +94,18 @@ input CreateServiceRequestInput {
   status: String!
   scheduledDate: String!
   contactInfo: String!
+  clientMutationId: String
+}
+
+type CreateUserPayload {
+  token: String
+  error: String
+  clientMutationId: String
+}
+
+input CreateUserInput {
+  name: String!
+  email: String!
+  password: String!
   clientMutationId: String
 }
