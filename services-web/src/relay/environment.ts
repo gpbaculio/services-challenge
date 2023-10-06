@@ -8,27 +8,73 @@ import {
   Variables,
   GraphQLResponse,
   CacheConfig,
+  UploadableMap,
 } from "relay-runtime";
 
 const HTTP_ENDPOINT = "http://localhost:4000/graphql";
 const IS_SERVER = typeof window === typeof undefined;
 const CACHE_TTL = 5 * 1000; // 5 seconds, to resolve preloaded results
 
-export async function networkFetch(
+const getRequestBodyWithUploadables = (
+  request: RequestParameters,
+  variables: Variables,
+  uploadables: UploadableMap
+) => {
+  const formData = new FormData();
+  formData.append("query", JSON.stringify(request.text));
+  formData.append("variables", JSON.stringify(variables));
+
+  Object.keys(uploadables).forEach((key) => {
+    if (Object.prototype.hasOwnProperty.call(uploadables, key)) {
+      formData.append(key, uploadables[key]);
+    }
+  });
+
+  return formData;
+};
+
+const getRequestBodyWithoutUplodables = (
   request: RequestParameters,
   variables: Variables
+) =>
+  JSON.stringify({
+    query: request.text,
+    variables,
+  });
+
+const getRequestBody = (
+  request: RequestParameters,
+  variables: Variables,
+  uploadables: UploadableMap | null | undefined
+) => {
+  if (uploadables) {
+    return getRequestBodyWithUploadables(request, variables, uploadables);
+  }
+
+  return getRequestBodyWithoutUplodables(request, variables);
+};
+
+export async function networkFetch(
+  request: RequestParameters,
+  variables: Variables,
+  uploadables: UploadableMap | null | undefined
 ): Promise<GraphQLResponse> {
+  // const token = await AsyncStorage.getItem('token');
+  const body = getRequestBody(request, variables, uploadables);
+
+  const headers = {
+    ...(uploadables
+      ? { Accept: "*/*" }
+      : { Accept: "application/json", "Content-type": "application/json" }),
+    // ...(token && { Authorization: token }),
+  };
+
   const resp = await fetch(HTTP_ENDPOINT, {
     method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      query: request.text,
-      variables,
-    }),
+    headers,
+    body,
   });
+
   const json = await resp.json();
 
   // GraphQL returns exceptions (for example, a missing required variable) in the "errors"
@@ -59,7 +105,8 @@ function createNetwork() {
   async function fetchResponse(
     params: RequestParameters,
     variables: Variables,
-    cacheConfig: CacheConfig
+    cacheConfig: CacheConfig,
+    uploadables: UploadableMap | null | undefined
   ) {
     const isQuery = params.operationKind === "query";
     const cacheKey = params.id ?? params.cacheID;
@@ -71,10 +118,11 @@ function createNetwork() {
       }
     }
 
-    return networkFetch(params, variables);
+    return networkFetch(params, variables, uploadables);
   }
 
   const network = Network.create(fetchResponse);
+
   return network;
 }
 

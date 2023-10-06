@@ -37,7 +37,7 @@ export const {
   connectionType: ServiceRequestConnection,
   edgeType: GraphQLServiceRequestEdge,
 } = connectionDefinitions({
-  name: "ServiceRequest",
+  name: SERVICE_REQUEST_TYPE,
   nodeType: ServiceRequestType,
 });
 

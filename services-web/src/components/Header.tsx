@@ -19,7 +19,21 @@ function Header() {
   function toggleIsOpen() {
     setIsOpen((o) => !o);
   }
-
+  // const [commitMutation, isMutationInFlight] = useMutation(
+  //   graphql`
+  //     mutation LikeButtonMutation($input: FeedbackLikeData!) {
+  //       feedback_like(data: $input) {
+  //         feedback {
+  //           viewer_does_like
+  //           like_count
+  //         }
+  //       }
+  //     }
+  //   `
+  // );
+  // commitMutation({
+  //   uploadables: {},
+  // });
   return (
     <header className="shadow-md w-full fixed top-0 left-0 bg-white">
       <div className="flex items-center justify-between bg-white h-20 px-7 md:px-10">
