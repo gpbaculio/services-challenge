@@ -5,9 +5,7 @@ import {
   globalIdField,
   nodeDefinitions,
 } from "graphql-relay";
-import { PrismaClient } from "@prisma/client";
-
-export const prisma = new PrismaClient();
+import { prisma } from "./Viewer.mjs";
 
 const SERVICE_REQUEST_TYPE = "ServiceRequest";
 

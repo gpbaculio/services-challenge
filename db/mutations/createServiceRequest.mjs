@@ -1,10 +1,8 @@
 import { GraphQLNonNull, GraphQLString } from "graphql";
 import { mutationWithClientMutationId, offsetToCursor } from "graphql-relay";
-import { PrismaClient } from "@prisma/client";
 
 import { GraphQLServiceRequestEdge } from "../query/types/ServiceRequestType.mjs";
-
-const prisma = new PrismaClient();
+import { prisma } from "../query/types/Viewer.mjs";
 
 const createServiceRequest = mutationWithClientMutationId({
   name: "CreateServiceRequest",

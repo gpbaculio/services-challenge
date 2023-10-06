@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 
-import { prisma } from "./query/types/ServiceRequestType.mjs";
+import { prisma } from "./query/types/Viewer.mjs";
 
 export async function getUser(token) {
   if (!token) {

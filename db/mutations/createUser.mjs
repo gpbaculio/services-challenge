@@ -3,7 +3,7 @@ import { mutationWithClientMutationId } from "graphql-relay";
 import bcrypt from "bcryptjs";
 
 import { generateToken } from "../auth.mjs";
-import { prisma } from "../query/types/ServiceRequestType.mjs";
+import { prisma } from "../query/types/Viewer.mjs";
 
 const GraphQLCreateUserMutation = mutationWithClientMutationId({
   name: "CreateUser",

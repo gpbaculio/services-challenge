@@ -11,7 +11,7 @@ import {
   nodeInterface,
 } from "./ServiceRequestType.mjs";
 
-const prisma = new PrismaClient();
+export const prisma = new PrismaClient();
 
 // fields under viewer are data that requires authentication
 const GraphQLViewerType = new GraphQLObjectType({
