@@ -27,6 +27,19 @@ type Viewer implements Node {
     """Returns the last n items from the list."""
     last: Int
   ): ServiceRequestConnection
+  admins(
+    """Returns the items in the list that come after the specified cursor."""
+    after: String
+
+    """Returns the first n items from the list."""
+    first: Int
+
+    """Returns the items in the list that come before the specified cursor."""
+    before: String
+
+    """Returns the last n items from the list."""
+    last: Int
+  ): AdminConnection
 }
 
 """An object with an ID"""
@@ -78,6 +91,34 @@ type ServiceRequest implements Node {
   contactInfo: String
 }
 
+"""A connection to a list of items."""
+type AdminConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [AdminEdge]
+}
+
+"""An edge in a connection."""
+type AdminEdge {
+  """The item at the end of the edge"""
+  node: Admin
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+type Admin implements Node {
+  """The ID of an object"""
+  id: ID!
+  name: String
+  image: String
+  email: String
+  createdAt: String
+  updatedAt: String
+}
+
 type Mutation {
   createServiceRequest(input: CreateServiceRequestInput!): CreateServiceRequestPayload
   createUser(input: CreateUserInput!): CreateUserPayload
@@ -107,5 +148,6 @@ input CreateUserInput {
   name: String!
   email: String!
   password: String!
+  image: String!
   clientMutationId: String
 }
