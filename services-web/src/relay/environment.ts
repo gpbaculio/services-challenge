@@ -24,7 +24,9 @@ const getRequestBodyWithUploadables = (
   formData.append("query", JSON.stringify(request.text));
   formData.append("variables", JSON.stringify(variables));
 
-  Object.keys(uploadables).forEach((key) => {
+  const keys = Object.keys(uploadables);
+
+  keys.forEach((key) => {
     if (Object.prototype.hasOwnProperty.call(uploadables, key)) {
       formData.append(key, uploadables[key]);
     }
