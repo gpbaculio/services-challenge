@@ -52,6 +52,10 @@ export const AdminType = new GraphQLObjectType({
       type: GraphQLString,
       resolve: ({ name }) => name,
     },
+    image: {
+      type: GraphQLString,
+      resolve: ({ image }) => image,
+    },
     email: {
       type: GraphQLString,
       resolve: ({ email }) => email,
