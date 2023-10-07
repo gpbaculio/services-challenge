@@ -35,6 +35,10 @@ const GraphQLCreateUserMutation = mutationWithClientMutationId({
       },
     });
 
+    if (process.env.NODE_ENV === "development") {
+      console.log("newUser ", JSON.stringify(newUser, null, 2));
+    }
+
     const token = generateToken(newUser);
 
     return { token, error: null };
