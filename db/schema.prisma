@@ -39,6 +39,8 @@ model User {
   updatedAt       DateTime         @updatedAt
   serviceRequests ServiceRequest[]
   type            String           @default("customer") // can be admin
+  image           String?
+  password        String
 }
 
 // from prev project
