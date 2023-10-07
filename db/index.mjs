@@ -1,6 +1,6 @@
 import "dotenv/config";
 import express from "express";
-import { createHandler } from "graphql-http/lib/use/express";
+import { createHandler } from "graphql-http/lib/use/express"; // yarn add graphql-upload
 import cors from "cors";
 
 import schema from "./schema.mjs";
@@ -9,13 +9,15 @@ import { getUser } from "./auth.mjs";
 const app = express();
 
 app.use(cors());
-// use postman as replacement for graphiql
+
+app.use(express.json());
+
 app.all(
   "/graphql",
   createHandler({
     schema,
     context: async (req) => {
-      const { user } = await getUser(req?.headers?.get("Authorization"));
+      const { user } = await getUser(req?.headers?.authorization);
 
       return { user };
     },
