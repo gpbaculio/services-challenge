@@ -32,8 +32,7 @@ const { nodeInterface, nodeField } = nodeDefinitions(
     // definitely a service request if valid
     if (obj?.servicetype) {
       return ServiceRequestType;
-    } else if (obj?.name && !obj.hasOwnProperty("type")) {
-      // user has type but not AdminType
+    } else if (obj?.type === "admin") {
       return AdminType;
     } else {
       return null;
