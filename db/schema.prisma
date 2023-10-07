@@ -8,12 +8,13 @@ datasource db {
   directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
-model Services {
+model Service {
   id                Int      @id @default(autoincrement())
   name              String
   description       String
   price             Int
   durationInMinutes Int
+  image             String
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
 }
