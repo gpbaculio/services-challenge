@@ -1,14 +1,14 @@
 "use client";
-import React, { useCallback, useState } from "react";
 
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { useMutation } from "react-relay";
-import { graphql } from "relay-runtime";
+import { experimental_useFormStatus } from "react-dom";
+
 import Header from "@/components/Header";
 import Modal from "@/components/Modal";
-import { experimental_useFormStatus } from "react-dom";
+
 import useCreateUserMutation from "./useCreateUserMutation";
 
 export const config = { api: { bodyParser: false } };
@@ -17,6 +17,7 @@ const schema = yup.object().shape({
   name: yup.string().required(),
   email: yup.string().email().required(),
   password: yup.string().required(),
+  image: yup.mixed<FileList>().required(),
 });
 
 type FormValues = {
@@ -45,7 +46,6 @@ function SubmitButton({ isLoading }: { isLoading: boolean }) {
 
 function Page() {
   const [showModal, setShowModal] = useState(false);
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   const {
     register,
@@ -58,13 +58,9 @@ function Page() {
   const [commit, isLoading] = useCreateUserMutation();
 
   const onSubmit = ({ name, email, password, image }: FormValues) => {
-    // const reader = new FileReader();
-    // reader.readAsDataURL(image);
-    // reader.onloadend = () => {
-    //   setSelectedImage(reader.result);
-    // };
     if (image && image[0]) {
       const reader = new FileReader();
+
       reader.readAsDataURL(image[0]);
 
       reader.onloadend = () => {
@@ -72,12 +68,13 @@ function Page() {
           variables: {
             input: { name, email, password, image: reader.result!.toString() },
           },
-          // uploadables: selectedImage ? { selectedImage } : undefined,
-          onCompleted: (response, errors) => {
-            if (errors) {
-              console.log(errors);
-            } else {
-              console.log("response useCreateUserMutation", response);
+          onCompleted(response, errors) {
+            if (process.env.NODE_ENV === "development") {
+              if (errors) {
+                console.log(errors);
+              } else {
+                console.log("useCreateUserMutation onCompleted", response);
+              }
             }
           },
           onError(error) {
@@ -104,97 +101,20 @@ function Page() {
           Create
         </button>
       </div>
-      <form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
-        <div className="mb-4">
-          <label className="block text-gray-700 font-bold mb-2" htmlFor="name">
-            Name
-          </label>
-          <input
-            className={`appearance-none border ${
-              errors.name ? "border-red-500" : "border-gray-200"
-            } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
-            type="file"
-            {...register("image")}
-            onChange={(event) => {
-              if (event.target.files && event.target.files[0]) {
-                const reader = new FileReader();
-                reader.readAsDataURL(event.target.files[0]);
-                reader.onloadend = () => {
-                  if (reader.result) {
-                    setSelectedImage(reader.result.toString());
-                  }
-                };
-              }
-            }}
-          />
-          <input
-            className={`appearance-none border ${
-              errors.name ? "border-red-500" : "border-gray-200"
-            } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
-            type="text"
-            id="name"
-            {...register("name")}
-          />
-          {errors.name && (
-            <p className="text-red-500 text-xs italic">{errors.name.message}</p>
-          )}
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700 font-bold mb-2" htmlFor="email">
-            Email
-          </label>
-          <input
-            className={`appearance-none border ${
-              errors.email ? "border-red-500" : "border-gray-200"
-            } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
-            type="email"
-            id="email"
-            {...register("email")}
-          />
-          {errors.email && (
-            <p className="text-red-500 text-xs italic">
-              {errors.email.message}
-            </p>
-          )}
-        </div>
-        <div className="mb-4">
-          <label
-            className="block text-gray-700 font-bold mb-2"
-            htmlFor="password"
-          >
-            Password
-          </label>
-          <input
-            className={`appearance-none border ${
-              errors.password ? "border-red-500" : "border-gray-200"
-            } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
-            type="password"
-            id="password"
-            {...register("password")}
-          />
-          {errors.password && (
-            <p className="text-red-500 text-xs italic">
-              {errors.password.message}
-            </p>
-          )}
-        </div>
-        <div className="flex items-center justify-between">
-          <SubmitButton isLoading={isLoading} />
-        </div>
-      </form>
-      {/* <Modal
+
+      <Modal
         isVisible={showModal}
         onClose={() => {
           setShowModal(false);
         }}
       >
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
           <div className="mb-4">
             <label
               className="block text-gray-700 font-bold mb-2"
-              htmlFor="name"
+              htmlFor="image"
             >
-              Name
+              Image
             </label>
             <input
               className={`appearance-none border ${
@@ -202,12 +122,15 @@ function Page() {
               } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
               type="file"
               {...register("image")}
-              onChange={(event) => {
-                if (event?.target?.files && event?.target?.files[0]) {
-                  setSelectedImage(event?.target?.files[0]);
-                }
-              }}
             />
+          </div>
+          <div className="mb-4">
+            <label
+              className="block text-gray-700 font-bold mb-2"
+              htmlFor="name"
+            >
+              Name
+            </label>
             <input
               className={`appearance-none border ${
                 errors.name ? "border-red-500" : "border-gray-200"
@@ -265,18 +188,10 @@ function Page() {
             )}
           </div>
           <div className="flex items-center justify-between">
-            <button
-              disabled={isLoading}
-              className={`bg-blue-500 ${
-                isLoading ? "disabled:opacity-50 cursor-wait" : ""
-              } hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline`}
-              type="submit"
-            >
-              {isLoading ? "Loading..." : "Create User"}
-            </button>
+            <SubmitButton isLoading={isLoading} />
           </div>
         </form>
-      </Modal> */}
+      </Modal>
     </div>
   );
 }
