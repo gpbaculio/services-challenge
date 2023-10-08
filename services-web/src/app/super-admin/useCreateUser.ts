@@ -5,7 +5,7 @@ import { useMutation } from "react-relay";
 
 import { useCreateUserMutation } from "../../../__generated__/useCreateUserMutation.graphql";
 
-const mutation = graphql`
+const graphQLMutation = graphql`
   mutation useCreateUserMutation($input: CreateUserInput!) {
     createUser(input: $input) {
       token
@@ -15,6 +15,6 @@ const mutation = graphql`
   }
 `;
 
-export default function useCreateUserMutation() {
-  return useMutation<useCreateUserMutation>(mutation);
+export default function useCreateUser() {
+  return useMutation<useCreateUserMutation>(graphQLMutation);
 }
