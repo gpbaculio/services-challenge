@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
-import { prisma } from "./query/index.mjs";
 import bcrypt from "bcryptjs";
+
+import { prisma } from "./query/index.mjs";
 
 export async function getUser(token) {
   if (!token) {
