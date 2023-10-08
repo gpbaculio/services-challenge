@@ -14,8 +14,7 @@ const query = new GraphQLObjectType({
     viewer: {
       type: GraphQLViewerType,
       resolve: (_root, _args, { user }) => {
-        // mock user, ideally return user from context above
-        return { id: "guest" };
+        return user;
       },
     },
     node: nodeField,

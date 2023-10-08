@@ -18,7 +18,7 @@ app.all(
     schema,
     context: async (req) => {
       const { user } = await getUser(req?.headers?.authorization);
-
+      console.log(JSON.stringify(user, null, 2));
       return { user };
     },
   })
