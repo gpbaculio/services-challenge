@@ -1,40 +1,16 @@
 "use client";
 
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
 import { experimental_useFormStatus } from "react-dom";
+import { useForm } from "react-hook-form";
 
 import Header from "@/components/Header";
 import Modal from "@/components/Modal";
 
 import useCreateUserMutation from "./useCreateUserMutation";
+import usePageFormResolver from "./usePageFormResolver";
 
 export const config = { api: { bodyParser: false } };
-
-const schema = yup.object().shape({
-  name: yup.string().required(),
-  email: yup.string().email().required(),
-  password: yup.string().required(),
-  image: yup
-    .mixed<FileList>()
-    .required()
-    .test(
-      "upload profile image",
-      "Upload admin profile image",
-      (value) => !value || (value && value.length > 0)
-    )
-    .test(
-      "format",
-      "Invalid format. Only jpg, jpeg, png are allowed",
-      (value) =>
-        !value ||
-        (value &&
-          value.length > 0 &&
-          ["image/jpg", "image/jpeg", "image/png"].includes(value[0].type))
-    ),
-});
 
 type FormValues = {
   name: string;
@@ -43,13 +19,12 @@ type FormValues = {
   image: FileList;
 };
 
-export function SubmitButton({
-  isLoading,
-  label,
-}: {
+type SubmitButtonProps = {
   isLoading: boolean;
   label: string;
-}) {
+};
+
+export function SubmitButton({ isLoading, label }: SubmitButtonProps) {
   const { pending } = experimental_useFormStatus();
 
   return (
@@ -69,13 +44,13 @@ export function SubmitButton({
 function Page() {
   const [showModal, setShowModal] = useState(false);
 
+  const resolver = usePageFormResolver();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormValues>({
-    resolver: yupResolver(schema),
-  });
+  } = useForm<FormValues>({ resolver });
 
   const [commit, isLoading] = useCreateUserMutation();
 
