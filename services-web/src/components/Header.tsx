@@ -12,6 +12,8 @@ function Header() {
   const links = [
     { name: "HOME", link: "/" },
     { name: "SERVICES", link: "/services" },
+    { name: "SIGN UP", link: "/sign-up" },
+    { name: "LOGIN", link: "/login" },
   ];
 
   const [isOpen, setIsOpen] = useState(false);
