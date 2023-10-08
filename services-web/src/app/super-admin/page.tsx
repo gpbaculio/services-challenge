@@ -17,7 +17,23 @@ const schema = yup.object().shape({
   name: yup.string().required(),
   email: yup.string().email().required(),
   password: yup.string().required(),
-  image: yup.mixed<FileList>().required(),
+  image: yup
+    .mixed<FileList>()
+    .required()
+    .test(
+      "upload profile image",
+      "Upload admin profile image",
+      (value) => !value || (value && value.length > 0)
+    )
+    .test(
+      "format",
+      "Invalid format. Only jpg, jpeg, png are allowed",
+      (value) =>
+        !value ||
+        (value &&
+          value.length > 0 &&
+          ["image/jpg", "image/jpeg", "image/png"].includes(value[0].type))
+    ),
 });
 
 type FormValues = {
@@ -118,11 +134,17 @@ function Page() {
             </label>
             <input
               className={`appearance-none border ${
-                errors.name ? "border-red-500" : "border-gray-200"
+                errors.image ? "border-red-500" : "border-gray-200"
               } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
               type="file"
+              id="image"
               {...register("image")}
             />
+            {errors.image && (
+              <p className="text-red-500 text-xs italic">
+                {errors.image.message}
+              </p>
+            )}
           </div>
           <div className="mb-4">
             <label
