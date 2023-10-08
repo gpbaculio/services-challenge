@@ -98,7 +98,6 @@ function Page() {
           Create
         </button>
       </div>
-
       <Modal
         isVisible={showModal}
         onClose={() => {
