@@ -43,19 +43,25 @@ type FormValues = {
   image: FileList;
 };
 
-function SubmitButton({ isLoading }: { isLoading: boolean }) {
+export function SubmitButton({
+  isLoading,
+  label,
+}: {
+  isLoading: boolean;
+  label: string;
+}) {
   const { pending } = experimental_useFormStatus();
 
   return (
     <button
       aria-disabled={pending}
       disabled={isLoading}
-      className={`bg-blue-500 ${
+      className={`bg-blue-500 w-1/2 self-center ${
         isLoading ? "disabled:opacity-50 cursor-wait" : ""
       } hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline`}
       type="submit"
     >
-      {isLoading ? "Loading..." : "Create User"}
+      {isLoading ? "Loading..." : label}
     </button>
   );
 }
@@ -124,7 +130,11 @@ function Page() {
           setShowModal(false);
         }}
       >
-        <form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          encType="multipart/form-data"
+          className="flex flex-col"
+        >
           <div className="mb-4">
             <label
               className="block text-gray-700 font-bold mb-2"
@@ -210,7 +220,7 @@ function Page() {
             )}
           </div>
           <div className="flex items-center justify-between">
-            <SubmitButton isLoading={isLoading} />
+            <SubmitButton isLoading={isLoading} label="Create User" />
           </div>
         </form>
       </Modal>
