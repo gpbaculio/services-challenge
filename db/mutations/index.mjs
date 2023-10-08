@@ -1,14 +1,15 @@
-// external imports
 import { GraphQLObjectType } from "graphql";
-// local imports
+
 import createServiceRequest from "./createServiceRequest.mjs";
 import createUser from "./createUser.mjs";
+import loginUser from "./loginUser.mjs";
 
 const mutation = new GraphQLObjectType({
   name: "Mutation",
   fields: {
     createServiceRequest,
     createUser,
+    loginUser,
   },
 });
 

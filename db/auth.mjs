@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken";
 import { prisma } from "./query/index.mjs";
+import bcrypt from "bcryptjs";
 
 export async function getUser(token) {
   if (!token) {
@@ -21,4 +22,14 @@ export async function getUser(token) {
 
 export function generateToken(user) {
   return `Bearer ${jwt.sign({ id: user.id }, process.env.JWT_SECRET)}`;
+}
+
+export async function authenticate(plainTextPassword, userPassword) {
+  try {
+    const isValid = await bcrypt.compare(plainTextPassword, userPassword);
+
+    return isValid;
+  } catch (err) {
+    return false;
+  }
 }
