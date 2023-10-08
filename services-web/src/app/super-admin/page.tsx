@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import Header from "@/components/Header";
 import Modal from "@/components/Modal";
 
-import useCreateUserMutation from "./useCreateUserMutation";
+import useCreateUserMutation from "./useCreateUser";
 import usePageFormResolver from "./usePageFormResolver";
 
 export const config = { api: { bodyParser: false } };
