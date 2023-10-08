@@ -1,5 +1,4 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import React from "react";
 import * as yup from "yup";
 
 const pageSchema = yup.object().shape({

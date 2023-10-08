@@ -2,20 +2,31 @@
 
 import React from "react";
 
-import Header from "@/components/Header";
 import { useForm } from "react-hook-form";
+
+import Header from "@/components/Header";
 import { SubmitButton } from "../super-admin/page";
 
-function page() {
+import useLoginYupResolver from "./useLoginYupResolver";
+
+type PageFormValues = {
+  email: string;
+  password: string;
+};
+
+function Page() {
+  const resolver = useLoginYupResolver();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<PageFormValues>({ resolver });
 
-  const onSubmit = (data) => {
+  const onSubmit = (data: PageFormValues) => {
     console.log(data);
   };
+
   return (
     <div className="min-h-screen w-full bg-blue-100 flex items-center justify-center">
       <Header />
@@ -68,4 +79,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;
