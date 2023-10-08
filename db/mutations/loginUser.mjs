@@ -3,7 +3,7 @@ import { GraphQLNonNull, GraphQLString } from "graphql";
 import { mutationWithClientMutationId } from "graphql-relay";
 
 import { prisma } from "../query/index.mjs";
-import { authenticate } from "../auth.mjs";
+import { authenticate, generateToken } from "../auth.mjs";
 
 const GraphQLUserLoginMutation = mutationWithClientMutationId({
   name: "UserLogin",

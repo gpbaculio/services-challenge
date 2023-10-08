@@ -4,6 +4,7 @@ import { useCallback, useState } from "react";
 
 import { graphql } from "relay-runtime";
 import { useMutation } from "react-relay";
+import { useRouter } from "next/navigation";
 
 import {
   UserLoginInput,
@@ -21,7 +22,8 @@ const graphQLMutation = graphql`
 `;
 
 export default function useLogin() {
-  const [loginSuccess, setLoginSuccess] = useState(false);
+  const router = useRouter();
+
   const [loginFailure, setLoginFailure] = useState(false);
 
   const [commit, isLoading] = useMutation<useLoginMutation>(graphQLMutation);
@@ -33,7 +35,7 @@ export default function useLogin() {
         onCompleted({ loginUser }) {
           if (loginUser?.token) {
             localStorage.setItem("token", loginUser.token);
-            setLoginSuccess(true);
+            router.push("/admin/service-requests");
           }
           if (loginUser?.error) {
             setLoginFailure(true);
@@ -47,7 +49,6 @@ export default function useLogin() {
   return {
     login,
     isLoading,
-    loginSuccess,
     loginFailure,
   };
 }

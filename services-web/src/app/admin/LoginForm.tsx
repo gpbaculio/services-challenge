@@ -14,7 +14,7 @@ type PageFormValues = {
 
 function LoginForm() {
   const resolver = useLoginYupResolver();
-  const { login, loginSuccess, isLoading, loginFailure } = useLogin();
+  const { login, isLoading, loginFailure } = useLogin();
 
   const {
     register,
